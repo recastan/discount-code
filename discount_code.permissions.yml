@@ -1,0 +1,15 @@
+view discount_code entity:
+  title: 'View Discount Code entity'
+
+add discount_code entity:
+  title: 'Add Discount Code entity'
+
+edit discount_code entity:
+  title: 'Edit Discount Code Entity'
+
+delete discount_code entity:
+  title: 'Delete Discount Code entity'
+
+administer discount_code entity:
+  title: 'Administer Discount Code entity'
+  restrict access: TRUE

@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Provides discount codes.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+use Drupal\discount_code\Entity\DiscountCode;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function discount_code_user_insert(UserInterface $entity) {
+  /** @var \Drupal\discount_code\DiscountCodeInterface $discountCode */
+  $discountCode = DiscountCode::create();
+  $discountCode->setUser($entity);
+  $discountCode->save();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function discount_code_form_user_register_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['actions']['submit']['#submit'][] = 'discount_code_user_register_form_submit_callback';
+}
+
+/**
+ * Render API callback: Handles register form submit.
+ *
+ * This function is assigned as callback in
+ * discount_code_form_user_register_form_alter().
+ */
+function discount_code_user_register_form_submit_callback(&$form, FormStateInterface $form_state) {
+  $url = Url::fromRoute('discount_code.discount_code');
+  $form_state->setRedirectUrl($url);
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function discount_code_token_info() {
+  $result = [
+    'types' => [
+      'discount-code' => [
+        'name' => t('Discount Code'),
+        'needs-data' => 'discount_code',
+      ],
+    ],
+    'tokens' => [
+      'discount-code' => [
+        'code' => [
+          'name' => t('Code'),
+        ],
+      ],
+    ],
+  ];
+
+  return $result;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function discount_code_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $result = [];
+
+  if ($type == 'discount-code' && !empty($data['discount-code'])) {
+    /** @var \Drupal\discount_code\DiscountCodeInterface $discountCode */
+    $discountCode = $data['discount-code'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'code':
+          $result[$original] = $discountCode->getCode();
+          break;
+      }
+    }
+  }
+
+  return $result;
+}

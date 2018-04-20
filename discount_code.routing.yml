@@ -1,0 +1,55 @@
+discount_code.discount_code:
+  path: '/discount_code'
+  defaults:
+    _title: 'Discount Code'
+    _controller: '\Drupal\discount_code\Controller\DiscountCodeController::discountCode'
+  requirements:
+    _permission: 'access content'
+
+discount_code.admin_settings:
+  path: '/admin/config/discount_code'
+  defaults:
+    _title: 'Discount Code configuration'
+    _form: '\Drupal\discount_code\Form\DiscountCodeSettingsForm'
+  requirements:
+    _permission: 'administer discount_code entity'
+
+discount_code.discount_code_add:
+  path: '/discount_code/add'
+  defaults:
+    _title: 'Add Discount Code'
+    _entity_form: discount_code.add
+  requirements:
+    _entity_create_access: 'discount_code'
+
+entity.discount_code.canonical:
+  path: '/discount_code/{discount_code}'
+  defaults:
+    _title: 'Discount Code Content'
+    _entity_view: 'discount_code'
+  requirements:
+    _entity_access: 'discount_code.view'
+
+entity.discount_code.collection:
+  path: '/discount_code/list'
+  defaults:
+    _title: 'Discount Code List'
+    _entity_list: 'discount_code'
+  requirements:
+    _permission: 'administer discount_code entity'
+
+entity.discount_code.edit_form:
+  path: '/discount_code/{discount_code}/edit'
+  defaults:
+    _title: 'Edit Discount Code'
+    _entity_form: discount_code.edit
+  requirements:
+    _entity_access: 'discount_code.edit'
+
+entity.discount_code.delete_form:
+  path: '/discount_code/{discount_code}/delete'
+  defaults:
+    _title: 'Delete Discount Code'
+    _entity_form: discount_code.delete
+  requirements:
+    _entity_access: 'discount_code.delete'

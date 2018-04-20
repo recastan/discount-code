@@ -1,0 +1,16 @@
+discount_code.discount_code:
+  title: 'Discount Code'
+  menu_name: main
+  route_name: discount_code.discount_code
+  weight: 1
+
+discount_code.admin_settings:
+  title: 'Discount Codes configuration'
+  parent: system.admin_config_system
+  route_name: discount_code.admin_settings
+
+entity.discount_code.collection:
+  title: 'Discount Codes'
+  description: 'Manage Discount Codes'
+  parent: system.admin_content
+  route_name: entity.discount_code.collection

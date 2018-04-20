@@ -1,0 +1,5 @@
+discount_code.discount_code_add:
+  title: 'Add Discount Code'
+  route_name: discount_code.discount_code_add
+  appears_on:
+    - entity.discount_code.collection

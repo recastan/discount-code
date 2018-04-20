@@ -1,0 +1,19 @@
+discount_code.settings_tab:
+  title: Settings
+  base_route: discount_code.admin_settings
+  route_name: discount_code.admin_settings
+
+discount_code.view:
+  title: View
+  base_route: entity.discount_code.canonical
+  route_name: entity.discount_code.canonical
+
+discount_code.page_edit:
+  title: Edit
+  base_route: entity.discount_code.canonical
+  route_name: entity.discount_code.edit_form
+
+discount_code.delete_confirm:
+  title: Delete
+  base_route:  entity.discount_code.canonical
+  route_name:  entity.discount_code.delete_form
